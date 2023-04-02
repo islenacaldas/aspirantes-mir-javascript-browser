@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Local Storage</title>
+  </head>
+  <body>
+    <form>
+      <label for="name">Ingresa tu nombre</label>
+      <input type="text" id="name" name="name" placeholder="Ingresa tu nombre">
+      <label for="email">Ingresa tu correo electrónico</label>
+      <input type="email" id="email" name="email" placeholder="Ingresa tu correo electrónico">
+      <button type="submit">Guardar</button>
+    </form>
+    <section></section>
+    <script>
+   
+      const form = document.querySelector('form');
+      const nameInput = document.querySelector('#name');
+      const emailInput = document.querySelector('#email');
+      const section = document.querySelector('section');
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const name = nameInput.value;
+        const email = emailInput.value;
+
+        const data = { name, email };
+        localStorage.setItem('userData', JSON.stringify(data));
+
+        
+        showData();
+      });
+      function showData() {
+        const userData = JSON.parse(localStorage.getItem('userData'));
+        if (userData) {
+          section.innerHTML = `
+            <p>Nombre: ${userData.name}</p>
+            <p>Correo electrónico: ${userData.email}</p>
+            <button id="deleteBtn">Borrar datos</button>
+          `;
+          const deleteBtn = document.querySelector('#deleteBtn');
+          deleteBtn.addEventListener('click', deleteData);
+        } else {
+          section.innerHTML = 'No hay datos guardados';
+        }
+      }
+      function deleteData() {
+        localStorage.removeItem('userData');
+        section.innerHTML = 'Datos eliminados';
+      }
+      showData();
+    </script>
+  </body>
+</html>
