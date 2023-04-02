@@ -1,0 +1,19 @@
+#todo-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  #todo-list li {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+  }
+  
+  #todo-list li input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  
+  .todo-completed {
+    text-decoration: line-through;
+  }
+  
